@@ -1,7 +1,7 @@
 services:
   - type: web
     name: sales-backend
-    env: java
+    env: docker
     buildCommand: mvn clean package -DskipTests
     startCommand: java -jar target/*.jar
     plan: free
@@ -28,9 +28,6 @@ services:
     startCommand: npx serve -s dist -p 3000
     plan: free
     region: oregon
-    envVars:
-      - key: VITE_API_BASE_URL
-        value: /api
 
 databases:
   - name: sales-db
