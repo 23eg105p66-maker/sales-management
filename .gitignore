@@ -1,0 +1,37 @@
+# Backend
+target/
+.classpath
+.project
+.settings/
+*.class
+*.jar
+*.war
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+.flattened-pom.xml
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.DS_Store
+
+# Frontend
+node_modules/
+dist/
+build/
+sales-frontend/node_modules/
+sales-frontend/dist/
+.env.local
+.env.*.local
+
+# General
+*.log
+*.swp
+*.swo
+*~
+.env
