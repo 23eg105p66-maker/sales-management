@@ -2,7 +2,6 @@ package com.sales.controller;
 
 import com.sales.dto.SalesDtos.*;
 import com.sales.service.SalesService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +12,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/sales")
-@RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 public class SalesController {
 
     private final SalesService salesService;
+
+    public SalesController(SalesService salesService) {
+        this.salesService = salesService;
+    }
 
     @GetMapping
     public ResponseEntity<List<SaleResponse>> getAllSales() {

@@ -7,7 +7,6 @@ import com.sales.entity.User;
 import com.sales.repository.ProductRepository;
 import com.sales.repository.SalesRepository;
 import com.sales.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,13 +16,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
 public class SalesService {
 
     private final SalesRepository salesRepository;
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
+
+    public SalesService(SalesRepository salesRepository, ProductRepository productRepository, UserRepository userRepository) {
+        this.salesRepository = salesRepository;
+        this.productRepository = productRepository;
+        this.userRepository = userRepository;
+    }
 
     public List<SaleResponse> getAllSales() {
         return salesRepository.findAll()

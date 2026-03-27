@@ -3,7 +3,6 @@ package com.sales.service;
 import com.sales.dto.SalesDtos.*;
 import com.sales.entity.Product;
 import com.sales.repository.ProductRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,11 +10,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
 public class ProductService {
 
     private final ProductRepository productRepository;
+
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     public List<ProductResponse> getAllProducts() {
         return productRepository.findAll()

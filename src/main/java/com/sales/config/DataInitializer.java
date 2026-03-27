@@ -2,19 +2,20 @@ package com.sales.config;
 
 import com.sales.entity.User;
 import com.sales.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
-@Slf4j
 public class DataInitializer implements CommandLineRunner {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+
+    public DataInitializer(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     public void run(String... args) {
@@ -28,9 +29,9 @@ public class DataInitializer implements CommandLineRunner {
                     .active(true)
                     .build();
             userRepository.save(admin);
-            log.info("Default admin user created — username: admin, password: admin123");
+            System.out.println("Default admin user created — username: admin, password: admin123");
         } else {
-            log.info("Admin user already exists, skipping seed.");
+            System.out.println("Admin user already exists, skipping seed.");
         }
     }
 }
