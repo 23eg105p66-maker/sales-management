@@ -2,10 +2,11 @@ services:
   # Backend API Service
   - type: web
     name: sales-backend
+    env: java
+    plan: free
     region: oregon
-    buildCommand: cd . && mvn clean package -DskipTests
+    buildCommand: mvn clean package -DskipTests
     startCommand: java -jar target/sales-management-backend-1.0.0.jar
-    healthCheckPath: /api/products
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -19,20 +20,18 @@ services:
         fromDatabase:
           name: sales-db
           property: password
-      - key: PORT
-        value: 8080
-      - key: JAVA_OPTS
-        value: -Xmx512m
 
   # Frontend Service
-  - type: web
+  - type: static
     name: sales-frontend
+    plan: free
     region: oregon
-    buildCommand: cd sales-frontend && npm install && VITE_API_BASE_URL=/api npm run build
-    startCommand: npm install -g serve && serve -s dist -p 3000
+    buildCommand: cd sales-frontend && npm install && npm run build
+    publicPath: sales-frontend/dist
+    routes:
+      - path: /api/*
+        destination: https://sales-backend.onrender.com/api
 
 databases:
   - name: sales-db
-    databaseName: sales_db
-    user: sales_user
     region: oregon
