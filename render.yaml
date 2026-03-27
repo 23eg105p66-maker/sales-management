@@ -1,11 +1,12 @@
 services:
+  # ========== BACKEND ==========
   - type: web
     name: sales-backend
-    runtime: java
+    runtime: docker
     plan: free
     region: oregon
-    buildCommand: mvn clean package -DskipTests
-    startCommand: java -jar target/sales-management-backend-1.0.0.jar
+    dockerfilePath: ./Dockerfile
+
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -20,6 +21,8 @@ services:
           name: sales-db
           property: password
 
+
+  # ========== FRONTEND ==========
   - type: web
     name: sales-frontend
     runtime: node
@@ -29,10 +32,13 @@ services:
       cd sales-frontend
       npm install
       npm run build
+
     startCommand: |
       npm install -g serve
       serve -s dist -p 3000
 
+
+# ========== DATABASE ==========
 databases:
   - name: sales-db
     plan: free
