@@ -2,7 +2,7 @@ services:
   # Backend API Service
   - type: web
     name: sales-backend
-    runtime: java
+    runtime: java17
     region: oregon
     buildCommand: cd . && mvn clean package -DskipTests
     startCommand: java -jar target/sales-management-backend-1.0.0.jar
