@@ -1,5 +1,4 @@
 services:
-  # ========== BACKEND ==========
   - type: web
     name: sales-backend
     env: java
@@ -21,7 +20,6 @@ services:
           name: sales-db
           property: password
 
-  # ========== FRONTEND ==========
   - type: web
     name: sales-frontend
     env: node
