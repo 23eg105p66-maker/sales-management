@@ -1,12 +1,11 @@
-FROM maven:3.9.6-eclipse-temurin-17 AS build
-
-WORKDIR /app
-COPY . .
-RUN mvn clean package -DskipTests
-
+# Use Java 17
 FROM openjdk:17-jdk-slim
 
+# Set working directory
 WORKDIR /app
-COPY --from=build /app/target/sales-management-backend-1.0.0.jar app.jar
 
-ENTRYPOINT ["java","-jar","app.jar"]
+# Copy jar
+COPY target/*.jar app.jar
+
+# Run app
+CMD ["java", "-jar", "app.jar"]
