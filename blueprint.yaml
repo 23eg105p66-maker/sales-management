@@ -10,7 +10,7 @@ services:
       - key: DATABASE_URL
         fromDatabase:
           name: sales-db
-          property: jdbcConnectionString 
+          property: jdbcConnectionString
       - key: DB_USERNAME
         fromDatabase:
           name: sales-db
@@ -26,7 +26,7 @@ services:
     env: node
     rootDir: sales-frontend
     buildCommand: npm install && npm run build
-    startCommand: npx serve -s dist
+    startCommand: npx serve -s dist -p 10000
     plan: free
     region: oregon
     envVars:
