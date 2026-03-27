@@ -24,19 +24,13 @@ services:
 
   # ========== FRONTEND ==========
   - type: web
-    name: sales-frontend
-    runtime: node
-    plan: free
-    region: oregon
-    buildCommand: |
-      cd sales-frontend
-      npm install
-      npm run build
-
-    startCommand: |
-      npm install -g serve
-      serve -s dist -p 3000
-
+  name: sales-frontend
+  runtime: node
+  plan: free
+  region: oregon
+  rootDir: sales-frontend
+  buildCommand: npm install && npm run build
+  startCommand: npx serve -s dist -p 3000
 
 # ========== DATABASE ==========
 databases:
