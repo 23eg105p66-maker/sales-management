@@ -2,8 +2,9 @@ services:
   # ========== BACKEND ==========
   - type: web
     name: sales-backend
+    env: java
     buildCommand: mvn clean package -DskipTests
-    startCommand: java -jar target/sales-management-backend-1.0.0.jar
+    startCommand: java -jar target/*.jar
     plan: free
     region: oregon
     envVars:
@@ -23,6 +24,7 @@ services:
   # ========== FRONTEND ==========
   - type: web
     name: sales-frontend
+    env: node
     rootDir: sales-frontend
     buildCommand: npm install && npm run build
     startCommand: npx serve -s dist -p 3000
@@ -32,7 +34,6 @@ services:
       - key: VITE_API_BASE_URL
         value: /api
 
-# ========== DATABASE ==========
 databases:
   - name: sales-db
     plan: free
