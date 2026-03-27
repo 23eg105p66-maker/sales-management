@@ -3,14 +3,14 @@ services:
   - type: web
     name: sales-backend
     env: docker
+    dockerfilePath: ./Dockerfile
     plan: free
     region: oregon
-    dockerfilePath: ./Dockerfile
     envVars:
       - key: DATABASE_URL
         fromDatabase:
           name: sales-db
-          property: connectionString
+          property: jdbcConnectionString 
       - key: DB_USERNAME
         fromDatabase:
           name: sales-db
@@ -26,9 +26,12 @@ services:
     env: node
     rootDir: sales-frontend
     buildCommand: npm install && npm run build
-    startCommand: npx serve -s dist -p 3000
+    startCommand: npx serve -s dist
     plan: free
     region: oregon
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: https://sales-backend.onrender.com
 
 databases:
   - name: sales-db
