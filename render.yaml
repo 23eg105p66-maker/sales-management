@@ -2,7 +2,7 @@ services:
   # Backend API Service
   - type: web
     name: sales-backend
-    env: java
+    runtime: java
     region: oregon
     buildCommand: cd . && mvn clean package -DskipTests
     startCommand: java -jar target/sales-management-backend-1.0.0.jar
@@ -28,7 +28,7 @@ services:
   # Frontend Service
   - type: web
     name: sales-frontend
-    env: node
+    runtime: node
     region: oregon
     buildCommand: cd sales-frontend && npm install && VITE_API_BASE_URL=/api npm run build
     startCommand: npm install -g serve && serve -s dist -p 3000
