@@ -6,7 +6,7 @@ services:
     region: oregon
     buildCommand: cd . && mvn clean package -DskipTests
     startCommand: java -jar target/sales-management-backend-1.0.0.jar
-    healthCheckPath: /
+    healthCheckPath: /api/products
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -30,11 +30,8 @@ services:
     name: sales-frontend
     env: node
     region: oregon
-    buildCommand: cd sales-frontend && npm install && npm run build
-    startCommand: npm install -g serve && serve -s dist -l 3000
-    routes:
-      - path: /api/*
-        destination: sales-backend:8080/api
+    buildCommand: cd sales-frontend && npm install && VITE_API_BASE_URL=/api npm run build
+    startCommand: npm install -g serve && serve -s dist -p 3000
 
 databases:
   - name: sales-db
